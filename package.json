@@ -187,6 +187,6 @@
     "deploy": "babel-node tools/run deploy",
     "render": "babel-node tools/run render",
     "start": "babel-node tools/run start",
-    "postinstall": "npm run build",
+    "postinstall": "npm run build"
   }
 }
