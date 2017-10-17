@@ -61,7 +61,7 @@
 
 :global(.navbar-brand) img {
   display: inline-block;
-  height: 26px;
+  height: 86px;
 }
 
 :global(.navbar-top-links) {
