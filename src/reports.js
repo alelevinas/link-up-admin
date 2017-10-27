@@ -13,12 +13,10 @@ export const ReportsList = (props) => (
             }
             medium={
                 <Datagrid>
-                    <TextField source="id" />
-                    <ReferenceField label="User" source="userId" reference="users">
-                        <TextField source="name" />
-                    </ReferenceField>
-                    <TextField source="title" />
-                    <TextField source="body" />
+                    <TextField source="userIdReporter" />
+
+                    <TextField source="userId" />
+                    <TextField source="reason" />
                     <EditButton />
                 </Datagrid>
             }
