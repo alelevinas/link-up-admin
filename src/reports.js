@@ -1,5 +1,8 @@
 import React from 'react';
 import { List, Responsive, SimpleList, Edit, Create, Filter, Datagrid, ReferenceField, TextField, EditButton, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput, DeleteButton } from 'admin-on-rest';
+import Icon from 'material-ui/svg-icons/image/collections-bookmark';
+
+export const ReportIcon = Icon;
 
 export const ReportsList = (props) => (
     <List title="Reports" {...props}>
