@@ -3,24 +3,13 @@ import { List, Responsive, SimpleList, Edit, Create, Filter, Datagrid, Reference
 
 export const ReportsList = (props) => (
     <List {...props}>
-        <Responsive
-            small={
-                <SimpleList
-                    primaryText={record => record.title}
-                    secondaryText={record => `${record.body}`}
-                    tertiaryText={record => record.name}
-                />
-            }
-            medium={
-                <Datagrid>
-                    <TextField source="userIdReporter" />
-
-                    <TextField source="userId" />
-                    <TextField source="reason" />
-                    <EditButton />
-                </Datagrid>
-            }
-        />
+        <Datagrid>
+            <TextField label="Date" />
+            <TextField label="Reporter" source="userIdReporter" />
+            <TextField label="User Reported" source="userId" />
+            <TextField source="reason" />
+            <DeleteButton />
+        </Datagrid>
     </List>
 );
 

@@ -5,10 +5,12 @@ import CustomField from './mui/field/customfield';
 export const UserList = (props) => (
     <List title="All users" {...props}>
         <Datagrid>
-            <TextField source="id" />
-            <TextField source="name" />
-            <TextField source="username" />
-            <CustomField source="email" />
+            <CustomField source="name" />
+            <TextField source="description" />
+            <TextField source="birthday" />
+            <TextField source="age" />
+            <TextField source="gender" />
+            <TextField source="reports" />
         </Datagrid>
     </List>
 );
