@@ -1,11 +1,12 @@
 import React from 'react';
 import { List, Datagrid, EmailField, TextField } from 'admin-on-rest';
 import CustomField from './mui/field/customfield';
+import FullNameField from './FullNameField';
 
 export const UserList = (props) => (
-    <List title="All users" {...props}>
+    <List title="Users" {...props}>
         <Datagrid>
-            <CustomField source="name" />
+        	<FullNameField />
             <TextField source="description" />
             <TextField source="birthday" />
             <TextField source="age" />

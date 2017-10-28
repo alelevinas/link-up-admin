@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Responsive, SimpleList, Edit, Create, Filter, Datagrid, ReferenceField, TextField, EditButton, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput, DeleteButton } from 'admin-on-rest';
 
 export const ReportsList = (props) => (
-    <List {...props}>
+    <List title="Reports" {...props}>
         <Datagrid>
             <TextField label="Date" />
             <TextField label="Reporter" source="userIdReporter" />
