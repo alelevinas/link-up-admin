@@ -90,7 +90,7 @@ const convertHTTPResponseToREST = (response, type, resource, params) => {
     case GET_LIST:
         return {
             data: json.data.map(x => x),
-            total: 1,
+            total: parseInt(headers.get('content-range').split('/').pop(), 10),
         };
     case CREATE:
         return { data: { ...params.data, id: json.id } };
