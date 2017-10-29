@@ -12,7 +12,7 @@ const FullNameField = ({ record = {}, size = 25 }) => <span>
 const PureFullNameField = pure(FullNameField);
 
 PureFullNameField.defaultProps = {
-    source: 'name',
+    source: 'userId',
     label: 'name',
 };
 
