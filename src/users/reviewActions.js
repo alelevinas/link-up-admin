@@ -11,8 +11,13 @@ export const reviewApprove = (id, data, basePath) => ({
     meta: { resource: 'users/'+id+'/enable', fetch: CREATE, cancelPrevious: false },
 });
 
+export const REVIEW_REJECT = 'REVIEW_REJECT';
+export const REVIEW_REJECT_LOADING = 'REVIEW_REJECT_LOADING';
+export const REVIEW_REJECT_FAILURE = 'REVIEW_REJECT_FAILURE';
+export const REVIEW_REJECT_SUCCESS = 'REVIEW_REJECT_SUCCESS';
+
 export const reviewReject = (id, data, basePath) => ({
-	type: REVIEW_APPROVE,
+	type: REVIEW_REJECT,
 	payload: { id, data: { ...data, status: 'accepted' }, basePath },
     meta: { resource: 'users/'+id+'/disable', fetch: CREATE, cancelPrevious: false },
 });
