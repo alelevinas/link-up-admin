@@ -4,11 +4,11 @@ import CustomField from '../mui/field/customfield';
 import FullNameField from './FullNameField';
 import ApproveButton from './ApproveButton';
 import LinkToRelatedReports from './LinkToRelatedReports';
-
+import rowStyle from './rowStyle';
 
 export const UserList = (props) => (
     <List title="Users" {...props}>
-        <Datagrid>
+        <Datagrid rowStyle={rowStyle}>
         	<FullNameField />
             <TextField source="description" />
             <TextField source="birthday" />
