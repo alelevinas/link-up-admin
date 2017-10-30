@@ -21,8 +21,8 @@ class ApproveButton extends Component {
         const { record } = this.props;
         return (
             <span>
-                <IconButton onClick={this.handleApprove} disabled={record.status === 'accepted'}><Block color="#bc00a4" /></IconButton>
-                <IconButton onClick={this.handleReject} disabled={record.status === 'rejected'}><Allow color="#00bcd4" /></IconButton>
+                <IconButton onClick={this.handleReject} disabled={record.disable === "true"}><Block color="#bc00a4" /></IconButton>
+                <IconButton onClick={this.handleApprove} disabled={record.disable === "false"}><Allow color="#00bcd4" /></IconButton>
             </span>
         );
     }
