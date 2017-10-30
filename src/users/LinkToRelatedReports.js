@@ -13,7 +13,7 @@ const LinkToRelatedReports = ({ record, translate }) => (
         icon={<ReportIcon />}
         containerElement={<Link
             to={{
-                pathname: '/reported',
+                pathname: '/reports',
                 search: stringify({ page: 1, perPage: 25, filter: JSON.stringify({ userId: record.id }) }),
             }}
         />}
