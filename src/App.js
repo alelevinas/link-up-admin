@@ -6,13 +6,16 @@ import myApiRestClient from './restClient';
 import { ReportsList, ReportsEdit, ReportsCreate } from './reports';
 import { UserList } from './users';
 import Dashboard from './Dashboard';
+import customRoutes from './customRoutes';
+import Menu from './Menu';
 import ReportIcon from 'material-ui/svg-icons/action/book';
 import UserIcon from 'material-ui/svg-icons/social/group';
 
+
 const App = () => (
-    <Admin title="Linkup Admin" authClient={authClient} dashboard={Dashboard} restClient={myApiRestClient} customSagas={sagas} >
-        <Resource name="reports" options={{ label: 'Reports' }} list={ReportsList} remove={Delete} icon={ReportIcon} />
-        <Resource name="users" options={{ label: 'Users' }} list={UserList} icon={UserIcon} />
+    <Admin title="Linkup Admin" menu={Menu} customRoutes={customRoutes} authClient={authClient} dashboard={Dashboard} restClient={myApiRestClient} customSagas={sagas} >
+		<Resource name="reports" list={ReportsList} remove={Delete} icon={ReportIcon} />
+        <Resource name="users" list={UserList} icon={UserIcon} />
     </Admin>
 );
 
