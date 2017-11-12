@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import persianUtils from 'material-ui-persian-date-picker-utils';
 import FullNameField from '../users/FullNameField';
-import CustomDateField from '../reports/CustomDateField';
+import CustomDateField from './CustomDateField';
 import {
   Tooltip,
   XAxis, YAxis, Area,
@@ -48,12 +48,14 @@ function transformData(ids, data){
   var data2 = [];
   ids.map(id =>
     data2.push(data[id]));
-  var data3 = [];
   for(var i = 0; i < data2.length; i++){
     data2[i]['Usuarios Comunes'] = data2[i]['commonUsers'];
     data2[i]['Usuarios Premium'] = data2[i]['premiumUsers'];
+    let year = 'numeric';
+    let month = '2-digit';
+    let day = '2-digit';
+    data2[i]['dateFormatted'] = (new Date((Number(data2[i]['date'])) * 1000)).toLocaleString(undefined,{year, month, day});
   }
-  console.log(data2);
   return data2;
 }
 
@@ -72,7 +74,7 @@ const ChartGrid = ({ ids, data, basePath }) => (
               <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <XAxis dataKey="date" />
+          <XAxis dataKey="dateFormatted" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
@@ -120,13 +122,13 @@ export const UsersReports = (props) => (
       </CardText>
     </Card>
     
-    <List title="Actividad de usuarios" {...props} pagination={null}>
+    <List title="Actividad de usuarios" {...props} pagination={null} sort={{ field: 'date', order: 'ASC' }}>
       <ChartGrid />
     </List>
 
-    <List title="Actividad de usuarios" {...props} actions={null}>
+    <List title="Actividad de usuarios" {...props} actions={null} sort={{ field: 'date', order: 'DESC' }}>
       <Datagrid>
-        <TextField source="date" label="Fecha" sortable={false}
+        <TextField source="dateFormatted" label="Fecha" sortable={false}
                 style={{ textAlign: 'center' }}
                 headerStyle={{ textAlign: 'center' }}/>
         <TextField source="commonUsers" label="Usuarios comunes" sortable={false}
