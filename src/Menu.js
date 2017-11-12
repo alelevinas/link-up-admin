@@ -10,6 +10,7 @@ import ReportReportsIcon from 'material-ui/svg-icons/action/donut-large';
 const items = [
     { name: 'reports', label: 'Denuncias', icon: <ReportIcon /> },
     { name: 'users', label: 'Usuarios', icon: <UserIcon /> },
+    { name: 'usersReports', label: 'Reportes Usuarios', icon: <ReportUsersIcon /> },
 ];
 
 const styles = {
@@ -34,13 +35,7 @@ const Menu = ({ onMenuTap, translate, logout }) => (
             />
         ))}
         <MenuItemLink
-            to="/usersReports"
-            primaryText={'Reportes usuarios'}
-            leftIcon={<ReportUsersIcon />}
-            onClick={onMenuTap}
-        />
-        <MenuItemLink
-            to="/reportsReports"
+            to="/reportsReport"
             primaryText={'Reportes denuncias'}
             leftIcon={<ReportReportsIcon />}
             onClick={onMenuTap}

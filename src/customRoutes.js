@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import UsersReports from './usersReports';
+import { ReportsReport } from './reportsReport';
 
 export default [
-    <Route exact path="/usersReports" component={UsersReports} />,
+    <Route exact path="/reportsReport" component={ReportsReport} />,
 ];

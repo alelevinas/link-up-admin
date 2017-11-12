@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Responsive, SimpleList, Edit, Create, Filter, Datagrid, ReferenceField, TextField, EditButton, DisabledInput, LongTextInput, ReferenceInput, SelectInput, SimpleForm, TextInput, DeleteButton } from 'admin-on-rest';
+import { List, Filter, Datagrid, ReferenceField, TextField, EditButton, ReferenceInput, SelectInput, TextInput, DeleteButton } from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/image/collections-bookmark';
 import FullNameField from '../users/FullNameField';
 import CustomDateField from './CustomDateField';
