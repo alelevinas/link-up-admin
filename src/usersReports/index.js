@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Filter, Datagrid, ReferenceField, TextField, EditButton, ReferenceInput, SelectInput, TextInput, DeleteButton, ViewTitle } from 'admin-on-rest';
+import { List, Show, Filter, Datagrid, ReferenceField, TextField, EditButton, ReferenceInput, SelectInput, TextInput, DeleteButton, ViewTitle } from 'admin-on-rest';
 import { Card, CardText } from 'material-ui/Card';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -44,6 +44,50 @@ const styles = {
   button: { margin: '1em' },
 };
 
+function transformData(ids, data){
+  var data2 = [];
+  ids.map(id =>
+    data2.push(data[id]));
+  var data3 = [];
+  for(var i = 0; i < data2.length; i++){
+    data2[i]['Usuarios Comunes'] = data2[i]['commonUsers'];
+    data2[i]['Usuarios Premium'] = data2[i]['premiumUsers'];
+  }
+  console.log(data2);
+  return data2;
+}
+
+const ChartGrid = ({ ids, data, basePath }) => (
+    <div style={{ margin: '1em' }}>
+      <ResponsiveContainer width="100%" aspect={3}>
+        <AreaChart data={transformData(ids, data)}
+          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+            </linearGradient>
+            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+            </linearGradient>
+          </defs>
+          <XAxis dataKey="date" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Area type="monotone" dataKey="Usuarios Comunes" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+          <Area type="monotone" dataKey="Usuarios Premium" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+);
+ChartGrid.defaultProps = {
+    data: {},
+    ids: [],
+};
+
+
 export const UsersReports = (props) => (
   <div>
     <Card style={styles.firstCard}>
@@ -75,35 +119,12 @@ export const UsersReports = (props) => (
         </div>
       </CardText>
     </Card>
+    
+    <List title="Actividad de usuarios" {...props} pagination={null}>
+      <ChartGrid />
+    </List>
 
-    <Card style={styles.singleCard}>
-      <ViewTitle title="Actividad de usuarios" />
-			<div>
-        <ResponsiveContainer width="100%" aspect={3}>
-          <AreaChart data={props.data}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-            <defs>
-              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-              </linearGradient>
-              <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
-                <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
-              </linearGradient>
-            </defs>
-            <XAxis dataKey="date" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Area type="monotone" dataKey="commonUsers" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-            <Area type="monotone" dataKey="premiumUsers" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-    </Card>
-
-    <List title="Actividad de usuarios" {...props}>
+    <List title="Actividad de usuarios" {...props} actions={null}>
       <Datagrid>
         <TextField source="date" label="Fecha" sortable={false}
                 style={{ textAlign: 'center' }}
