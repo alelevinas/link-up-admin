@@ -1,6 +1,5 @@
 import React from 'react';
-import { List, Datagrid, EmailField, TextField } from 'admin-on-rest';
-import CustomField from '../mui/field/customfield';
+import { List, Datagrid, TextField } from 'admin-on-rest';
 import FullNameField from './FullNameField';
 import ApproveButton from './ApproveButton';
 import LinkToRelatedReports from './LinkToRelatedReports';

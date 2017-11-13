@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
-import IconButton from 'material-ui/IconButton';
 import Block from 'material-ui/svg-icons/content/block';
 import { reviewReject as reviewRejectAction } from './reviewActions';
 
@@ -13,7 +12,6 @@ class BlockUserButton extends Component {
     }
 
     render() {
-        const { record } = this.props;
         return (
         	    <FlatButton
 			        primary

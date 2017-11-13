@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Filter, Datagrid, ReferenceField, TextField, EditButton, ReferenceInput, SelectInput, TextInput, DeleteButton } from 'admin-on-rest';
+import { List, Datagrid, ReferenceField, TextField, DeleteButton } from 'admin-on-rest';
 import Icon from 'material-ui/svg-icons/image/collections-bookmark';
 import FullNameField from '../users/FullNameField';
 import CustomDateField from './CustomDateField';
@@ -24,16 +24,3 @@ export const ReportsList = (props) => (
         </Datagrid>
     </List>
 );
-
-const ReportsFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Search" source="q" alwaysOn />
-        <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
-            <SelectInput optionText="name" />
-        </ReferenceInput>
-    </Filter>
-);
-
-const ReportsTitle = ({ record }) => {
-    return <span>Report {record ? `"${record.title}"` : ''}</span>;
-};

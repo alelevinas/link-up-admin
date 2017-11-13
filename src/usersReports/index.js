@@ -1,18 +1,13 @@
 import React from 'react';
-import { List, Show, Filter, Datagrid, ReferenceField, TextField, EditButton, ReferenceInput, SelectInput, TextInput, DeleteButton, ViewTitle } from 'admin-on-rest';
+import { List, Datagrid, TextField } from 'admin-on-rest';
 import { Card, CardText } from 'material-ui/Card';
 import DatePicker from 'material-ui/DatePicker';
 import areIntlLocalesSupported from 'intl-locales-supported';
-import persianUtils from 'material-ui-persian-date-picker-utils';
-import FullNameField from '../users/FullNameField';
-import CustomDateField from './CustomDateField';
-import RaisedButton from 'material-ui/RaisedButton';
 import {
   Tooltip,
   XAxis, YAxis, Area,
-  CartesianGrid, AreaChart, Bar, BarChart,
+  CartesianGrid, AreaChart,
   ResponsiveContainer } from '../../node_modules/recharts';
-import FilterButton from './FilterButton';
 
 let DateTimeFormat;
 
@@ -126,7 +121,6 @@ export const UsersReports = (props) => (
               onChange={props.dateTo = toDateChanged}
               container="inline"
             />
-            <FilterButton />
         </div>
       </CardText>
     </Card>

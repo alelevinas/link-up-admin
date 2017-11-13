@@ -5,7 +5,6 @@ import { translate, DashboardMenuItem, MenuItemLink } from 'admin-on-rest';
 import ReportIcon from 'material-ui/svg-icons/action/book';
 import UserIcon from 'material-ui/svg-icons/social/group';
 import ReportUsersIcon from 'material-ui/svg-icons/action/timeline';
-import ReportReportsIcon from 'material-ui/svg-icons/action/donut-large';
 
 const items = [
     { name: 'reports', label: 'Denuncias', icon: <ReportIcon /> },

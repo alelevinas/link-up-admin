@@ -1,9 +1,9 @@
 import React from 'react';
-import { jsonServerRestClient, Admin, Resource, Delete } from 'admin-on-rest';
+import { Admin, Resource, Delete } from 'admin-on-rest';
 import sagas from './sagas';
 import authClient from './authClient';
 import myApiRestClient from './restClient';
-import { ReportsList, ReportsEdit, ReportsCreate } from './reports';
+import { ReportsList } from './reports';
 import { UserList } from './users';
 import Dashboard from './Dashboard';
 import customRoutes from './customRoutes';
