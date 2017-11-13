@@ -10,6 +10,9 @@ import {
 import {
     FILTER_USERS_REPORTS
 } from '../usersReports/reviewActions';
+import {
+    REPORTS_REJECT_USER
+} from '../reports/reviewActions';
 
 export default function* reviewSaga() {
     yield [
@@ -35,6 +38,12 @@ export default function* reviewSaga() {
         takeEvery(REVIEW_REJECT_FAILURE, function* ({ error }) {
             yield put(showNotification('Error deshabilitando usuario!', 'warning'));
             console.error(error);
+        }),
+        takeEvery(REPORTS_REJECT_USER, function* ({ error }) {
+            yield put(showNotification('Usuario correctamente deshabilitado!'));
+            yield put(push('/'));
+            yield put(push('./reports'));
+            window.location.reload();
         }),
     ];
 }
