@@ -34,12 +34,6 @@ const Menu = ({ onMenuTap, translate, logout }) => (
                 onClick={onMenuTap}
             />
         ))}
-        <MenuItemLink
-            to="/reportsReport"
-            primaryText={'Reportes denuncias'}
-            leftIcon={<ReportReportsIcon />}
-            onClick={onMenuTap}
-        />
         {logout}
     </div>
 );

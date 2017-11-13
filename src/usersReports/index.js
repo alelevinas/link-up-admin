@@ -45,7 +45,7 @@ function transformData(ids, data){
     let year = 'numeric';
     let month = '2-digit';
     let day = '2-digit';
-    data2[i]['dateFormatted'] = (new Date((Number(data2[i]['date'])) * 1000)).toLocaleString(undefined,{year, month, day});
+    data2[i]['dateFormatted'] = (new Date(Number(data2[i]['date']))).toLocaleString(undefined,{year, month, day});
   }
   return data2;
 }
@@ -86,16 +86,14 @@ if(dateTo == null)
   var dateTo = Date.now();
 
 function fromDateChanged(event, date) {
-  console.log("old defaultProps -> " + dateFrom);
-  console.log('date desdeee', Math.round(date.getTime()/1000));
-  dateFrom = Math.round(date.getTime()/1000);
-  console.log("new defaultProps -> " + dateFrom);
+  console.log('date desdeee', Math.round(date.getTime()));
+  dateFrom = date.getTime();
   return dateFrom;
 }
 
 function toDateChanged(event, date) {
-  console.log('date hasta', Math.round(date.getTime()/1000));
-  dateTo = Math.round(date.getTime()/1000);
+  console.log('date hasta', Math.round(date.getTime()));
+  dateTo = date.getTime();
   return dateTo;
 }
 
@@ -133,11 +131,11 @@ export const UsersReports = (props) => (
       </CardText>
     </Card>
     
-    <List title="Actividad de usuarios" {...props} pagination={null} sort={{ field: 'date', order: 'ASC' }}>
+    <List title="Actividad de usuarios" {...props} pagination={null} sort={{ field: 'date', order: 'asc' }}>
       <ChartGrid />
     </List>
 
-    <List title="Actividad de usuarios" {...props} filter={{ dateFrom: dateFrom, dateTo: dateTo }} actions={null} sort={{ field: 'date', order: 'DESC' }}>
+    <List title="Actividad de usuarios" {...props} filter={{ dateFrom: dateFrom, dateTo: dateTo }} actions={null} sort={{ field: 'date', order: 'desc' }}>
       <Datagrid>
         <TextField source="dateFormatted" label="Fecha" sortable={false}
                 style={{ textAlign: 'center' }}
