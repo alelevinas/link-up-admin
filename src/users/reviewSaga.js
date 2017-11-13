@@ -7,6 +7,9 @@ import {
     REVIEW_REJECT_SUCCESS,
     REVIEW_REJECT_FAILURE,
 } from './reviewActions';
+import {
+    FILTER_USERS_REPORTS
+} from '../usersReports/reviewActions';
 
 export default function* reviewSaga() {
     yield [
@@ -14,6 +17,11 @@ export default function* reviewSaga() {
             yield put(showNotification('Usuario correctamente habilitado!'));
             yield put(push('/'));
             yield put(push('/users'));
+        }),
+        takeEvery(FILTER_USERS_REPORTS, function* () {
+            yield put(showNotification('Anda el refresh wacho???'));
+            yield put(push('/'));
+            yield put(push('./usersReports'));
         }),
         takeEvery(REVIEW_APPROVE_FAILURE, function* ({ error }) {
             yield put(showNotification('Error habilitando usuario!', 'warning'));

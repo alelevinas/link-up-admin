@@ -2,16 +2,17 @@ import React from 'react';
 import { List, Show, Filter, Datagrid, ReferenceField, TextField, EditButton, ReferenceInput, SelectInput, TextInput, DeleteButton, ViewTitle } from 'admin-on-rest';
 import { Card, CardText } from 'material-ui/Card';
 import DatePicker from 'material-ui/DatePicker';
-import RaisedButton from 'material-ui/RaisedButton';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import persianUtils from 'material-ui-persian-date-picker-utils';
 import FullNameField from '../users/FullNameField';
 import CustomDateField from './CustomDateField';
+import RaisedButton from 'material-ui/RaisedButton';
 import {
   Tooltip,
   XAxis, YAxis, Area,
   CartesianGrid, AreaChart, Bar, BarChart,
   ResponsiveContainer } from '../../node_modules/recharts';
+import FilterButton from './FilterButton';
 
 let DateTimeFormat;
 
@@ -26,16 +27,6 @@ if (areIntlLocalesSupported(['fr', 'fa-IR'])) {
   require('intl/locale-data/jsonp/fr');
   require('intl/locale-data/jsonp/fa-IR');
 }
-
-const data = [
-  { date: 'XX/YY/ZZZZ', uv: 4000, pv: 2400 },
-  { date: 'XX/YY/ZZZZ', uv: 3000, pv: 1398 },
-  { date: 'XX/YY/ZZZZ', uv: 2000, pv: 9800 },
-  { date: 'XX/YY/ZZZZ', uv: 2780, pv: 3908 },
-  { date: 'XX/YY/ZZZZ', uv: 1890, pv: 4800 },
-  { date: 'XX/YY/ZZZZ', uv: 2390, pv: 3800 },
-  { date: 'XX/YY/ZZZZ', uv: 3490, pv: 4300 },
-];
 
 const styles = {
   firstCard: { marginBottom: '1em' },
@@ -60,35 +51,53 @@ function transformData(ids, data){
 }
 
 const ChartGrid = ({ ids, data, basePath }) => (
-    <div style={{ margin: '1em' }}>
-      <ResponsiveContainer width="100%" aspect={3}>
-        <AreaChart data={transformData(ids, data)}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
-            </linearGradient>
-            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="dateFormatted" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Area type="monotone" dataKey="Usuarios Comunes" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
-          <Area type="monotone" dataKey="Usuarios Premium" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
+  <div style={{ margin: '1em' }}>
+    <ResponsiveContainer width="100%" aspect={3}>
+      <AreaChart data={transformData(ids, data)}
+        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+            <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+          </linearGradient>
+          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+          </linearGradient>
+        </defs>
+        <XAxis dataKey="dateFormatted" />
+        <YAxis />
+        <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip />
+        <Area type="monotone" dataKey="Usuarios Comunes" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+        <Area type="monotone" dataKey="Usuarios Premium" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+      </AreaChart>
+    </ResponsiveContainer>
+  </div>
 );
 ChartGrid.defaultProps = {
-    data: {},
-    ids: [],
+  data: {},
+  ids: [],
 };
 
+if(dateFrom == null)
+  var dateFrom = 0;
+if(dateTo == null)
+  var dateTo = Date.now();
+
+function fromDateChanged(event, date) {
+  console.log("old defaultProps -> " + dateFrom);
+  console.log('date desdeee', Math.round(date.getTime()/1000));
+  dateFrom = Math.round(date.getTime()/1000);
+  console.log("new defaultProps -> " + dateFrom);
+  return dateFrom;
+}
+
+function toDateChanged(event, date) {
+  console.log('date hasta', Math.round(date.getTime()/1000));
+  dateTo = Math.round(date.getTime()/1000);
+  return dateTo;
+}
 
 export const UsersReports = (props) => (
   <div>
@@ -104,6 +113,7 @@ export const UsersReports = (props) => (
                 month: 'long',
                 year: 'numeric',
               }).format}
+              onChange={props.dateFrom = fromDateChanged}
               container="inline"
             />
             <DatePicker
@@ -115,9 +125,10 @@ export const UsersReports = (props) => (
                 month: 'long',
                 year: 'numeric',
               }).format}
+              onChange={props.dateTo = toDateChanged}
               container="inline"
             />
-            <RaisedButton style={styles.button} label={'Filtrar'} primary onClick={() => console.log('refresh values')} />
+            <FilterButton />
         </div>
       </CardText>
     </Card>
@@ -126,7 +137,7 @@ export const UsersReports = (props) => (
       <ChartGrid />
     </List>
 
-    <List title="Actividad de usuarios" {...props} actions={null} sort={{ field: 'date', order: 'DESC' }}>
+    <List title="Actividad de usuarios" {...props} filter={{ dateFrom: dateFrom, dateTo: dateTo }} actions={null} sort={{ field: 'date', order: 'DESC' }}>
       <Datagrid>
         <TextField source="dateFormatted" label="Fecha" sortable={false}
                 style={{ textAlign: 'center' }}
